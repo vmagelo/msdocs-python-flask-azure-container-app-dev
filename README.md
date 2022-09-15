@@ -6,9 +6,14 @@ Here are some scenarios for using this repo:
 
 * You can run the web app locally in a virtual environment. Make sure to define *.env* file with environment settings.
 
-* You can create a container locally and run it in Docker. For this scenario, set REMOTE_POSTGRESQL=1 in *.env* file and use the command: `docker run -it --env-file .env --publish 8000:8000/tcp pythoncontainer:latest` set environment variables for container. See the *.env.example* file for details.
+* You can create a container locally and run it in Docker. For this scenario, set REMOTE_POSTGRESQL=1 in *.env* file. See the *.env.example* file for details.
 
-  If you want to use PostgreSQL instance locally, you add `--add-host` to the Docker command. For more information, see the [Docker run](https://docs.docker.com/engine/reference/commandline/run/) command. For an example of how to do this with MongoDB, see [Build and test a containerized Python web app locally](https://docs.microsoft.com/azure/developer/python/tutorial-containerize-deploy-python-web-app-azure-02).
+  ```bash
+  docker build --file Dockerfile --tag pythoncontainer:latest
+  docker run -it --env-file .env --publish 5000:5000/tcp pythoncontainer:latest
+  ```
+
+  If you want to use PostgreSQL instance locally, add `--add-host` to the Docker command. For more information, see the [Docker run](https://docs.docker.com/engine/reference/commandline/run/) command. For an example of how to do this with MongoDB, see [Build and test a containerized Python web app locally](https://docs.microsoft.com/azure/developer/python/tutorial-containerize-deploy-python-web-app-azure-02).
 
 * Deploy the code to App Service. For guidance on how to deploy code, see [Quickstart: Deploy a Python (Django or Flask) web app to Azure App Service](https://docs.microsoft.com/azure/app-service/quickstart-python) and [Overview: Deploy a Python web app to Azure with managed identity](https://docs.microsoft.com/azure/developer/python/tutorial-python-managed-identity-01).
 
