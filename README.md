@@ -9,7 +9,7 @@ Here are some scenarios for using this repo:
 * You can create a container locally and run it in Docker. For this scenario, set REMOTE_POSTGRESQL=1 in *.env* file. See the *.env.example* file for details.
 
   ```bash
-  docker build --file Dockerfile --tag pythoncontainer:latest
+  docker build --file Dockerfile --tag pythoncontainer:latest .
   docker run -it --env-file .env --publish 5000:5000/tcp pythoncontainer:latest
   ```
 
