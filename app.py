@@ -11,18 +11,19 @@ from requests import RequestException
 app = Flask(__name__, static_folder='static')
 csrf = CSRFProtect(app)
 
-# WEBSITE_HOSTNAME exists only in production environment
-if not 'WEBSITE_HOSTNAME' in os.environ:
-   # local development, where we'll use environment variables
+# If RUNNING_IN_PRODUCTION is defined as an environment variable, then we're running on Azure
+if not 'RUNNING_IN_PRODUCTION' in os.environ:
+   # Local development, where we'll use environment variables.
    print("Loading config.development and environment variables from .env file.")
    app.config.from_object('azureproject.development')
 else:
-   # production
+   # Production, we don't load environment variables from .env file but add them as environment variables in Azure.
    print("Loading config.production.")
    app.config.from_object('azureproject.production')
 
 with app.app_context():
     app.config.update(
+        SQLALCHEMY_DATABASE_URI=app.config.get('DATABASE_URI'),
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
     )
 
@@ -53,9 +54,7 @@ def details(id, message):
     from models import Restaurant, Review
     restaurant = Restaurant.query.where(Restaurant.id == id).first()
     reviews = Review.query.where(Review.restaurant==id)
-    account_url = get_account_url()
-    image_path = account_url + "/" + os.environ['STORAGE_CONTAINER_NAME']
-    return render_template('details.html', restaurant=restaurant, reviews=reviews, message=message, image_path=image_path)
+    return render_template('details.html', restaurant=restaurant, reviews=reviews, message=message)
 
 @app.route('/create', methods=['GET'])
 def create_restaurant():
@@ -136,14 +135,6 @@ def utility_processor():
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
-
-def get_account_url():
-    # Create LOCAL_USE_AZURE_STORAGE environment variable to use Azure Storage locally. 
-    if 'WEBSITE_HOSTNAME' in os.environ or ("LOCAL_USE_AZURE_STORAGE" in os.environ):
-        print("Using Azure Storage.")
-        return "https://%s.blob.core.windows.net" % os.environ['STORAGE_ACCOUNT_NAME']
-    else:
-        return os.environ['STORAGE_ACCOUNT_NAME']
 
 if __name__ == '__main__':
    app.run()

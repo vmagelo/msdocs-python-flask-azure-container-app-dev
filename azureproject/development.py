@@ -20,10 +20,10 @@ if 'USE_REMOTE_POSTGRESQL' in os.environ:
     DBPASS=os.environ['AZURE_POSTGRESQL_PASSWORD']
 
 DATABASE_URI = 'postgresql+psycopg2://{dbuser}:{dbpass}@{dbhost}/{dbname}'.format(
-    DBUSER,
-    DBPASS,
-    DBHOST,
-    DBNAME
+    dbuser=DBUSER,
+    dbpass=DBPASS,
+    dbhost=DBHOST,
+    dbname=DBNAME
 )
 
 TIME_ZONE = 'UTC'
