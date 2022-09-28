@@ -47,3 +47,4 @@ The steps to do this are covered more completely in the **TBD** tutorial. Briefl
 1. Create a PostgreSQL Flexible Server instance.
 1. Create a database on the server.
 1. Deploy the web app container to Container Apps.
+1. Configure continuous deployment.
