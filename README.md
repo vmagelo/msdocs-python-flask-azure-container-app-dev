@@ -1,8 +1,6 @@
 # Deploy a Python (Django) app to Azure to Azure Containers Apps
 
-This Python app is a simple restaurant review application built with the [Flask](https://flask.palletsprojects.com/en/2.1.x/) framework. The app uses stores application data in PostgreSQL with environment variables defining the connection info.
-
-Here are some scenarios for using this repo. The first scenario is the primary deployment of this repo.
+This Python web app is a simple restaurant review application built with the [Flask](https://flask.palletsprojects.com/en/2.1.x/) framework. The web app stores application data in PostgreSQL with environment variables defining the connection info.
 
 This repo was created to be built to a Docker image and run as a container instance in [Azure Container Apps](https://azure.microsoft.com/services/container-apps/). For more information, see the tutorial [TBD][TBD].
 
@@ -19,7 +17,7 @@ This Python web app repo can also be used in other ways:
 
   If you want to use PostgreSQL instance locally, add `--add-host` to the Docker command. For more information, see the [Docker run](https://docs.docker.com/engine/reference/commandline/run/) command. For an example of how to do this with MongoDB, see [Build and test a containerized Python web app locally](https://docs.microsoft.com/azure/developer/python/tutorial-containerize-deploy-python-web-app-azure-02).
 
-* You can deploy the code (not container) to App Service. For guidance on how to deploy code, see [Quickstart: Deploy a Python (Django or Flask) web app to Azure App Service](https://docs.microsoft.com/azure/app-service/quickstart-python) and [Overview: Deploy a Python web app to Azure with managed identity](https://docs.microsoft.com/azure/developer/python/tutorial-python-managed-identity-01).
+* You can deploy the code (not a container) to App Service. For guidance on how to deploy code, see [Quickstart: Deploy a Python (Django or Flask) web app to Azure App Service](https://docs.microsoft.com/azure/app-service/quickstart-python) and [Overview: Deploy a Python web app to Azure with managed identity](https://docs.microsoft.com/azure/developer/python/tutorial-python-managed-identity-01).
 
 * You can create a Docker image from this repo and host the container instance in Web Apps for Containers (App Service). See [Overview: Containerized Python web app on Azure](https://docs.microsoft.com/azure/developer/python/tutorial-containerize-deploy-python-web-app-azure-01).
 
